@@ -1,7 +1,7 @@
 import React from "react";
 import ActiveUsersLineGraph from "./ActiveUsersLineGraph";
 
-export default function SubscriberChart(){
+export default function UserChart(){
     return(
         <>
             <div className="col-lg-7">
