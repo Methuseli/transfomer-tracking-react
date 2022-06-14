@@ -3,7 +3,7 @@ import 'primeicons/primeicons.css';
 
 interface DataProps{
     data : {
-        website: string;
+        websites: any;
         company: string;
         total_number_of_websites: number;
         number_of_active_users: number;
@@ -21,7 +21,7 @@ export default function WebsitesOverview({data}: DataProps){
                     <h6>Websites overview</h6>
                     <p className="text-sm">
                         Active Users 
-                        <span className="font-weight-bold">{data.number_of_active_users}</span> this month
+                        <span className="font-weight-bold"> {data?.number_of_active_users}</span> this month
                     </p>
                     </div>
                     <div className="card-body p-3">
@@ -31,8 +31,8 @@ export default function WebsitesOverview({data}: DataProps){
                                     <i className="pi pi-globe text-success text-gradient"></i>
                                 </span>
                                 <div className="timeline-content">
-                                    <h6 className="text-dark text-sm font-weight-bold mb-0">Most Surveyed Website</h6>
-                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data.website}</p>
+                                    <h6 className="text-dark text-sm font-weight-bold mb-0">My latest Website</h6>
+                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data?.websites[0]}</p>
                                 </div>
                             </div>
                             <div className="timeline-block mb-3">
@@ -40,8 +40,8 @@ export default function WebsitesOverview({data}: DataProps){
                                     <i className="pi pi-star-fill text-success text-gradient"></i>
                                 </span>
                                 <div className="timeline-content">
-                                    <h6 className="text-dark text-sm font-weight-bold mb-0">Company with the most websites</h6>
-                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data.company}</p>
+                                    <h6 className="text-dark text-sm font-weight-bold mb-0">My Company</h6>
+                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data?.company}</p>
                                 </div>
                             </div>
                             <div className="timeline-block mb-3">
@@ -50,7 +50,7 @@ export default function WebsitesOverview({data}: DataProps){
                                 </span>
                                 <div className="timeline-content">
                                     <h6 className="text-dark text-sm font-weight-bold mb-0">Total Number Websites</h6>
-                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data.total_number_of_websites}</p>
+                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data?.total_number_of_websites}</p>
                                 </div>
                             </div>
                             <div className="timeline-block mb-3">
@@ -59,7 +59,7 @@ export default function WebsitesOverview({data}: DataProps){
                                 </span>
                                 <div className="timeline-content">
                                     <h6 className="text-dark text-sm font-weight-bold mb-0">Number of Active Users</h6>
-                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data.number_of_active_users}</p>
+                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data?.number_of_active_users}</p>
                                 </div>
                             </div>
                             <div className="timeline-block mb-3">
@@ -68,7 +68,7 @@ export default function WebsitesOverview({data}: DataProps){
                                 </span>
                                 <div className="timeline-content">
                                     <h6 className="text-dark text-sm font-weight-bold mb-0">Total Number of Companies</h6>
-                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data.total_number_of_companies}</p>
+                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data?.total_number_of_companies}</p>
                                 </div>
                             </div>
                             <div className="timeline-block">
@@ -77,7 +77,7 @@ export default function WebsitesOverview({data}: DataProps){
                                 </span>
                                 <div className="timeline-content">
                                     <h6 className="text-dark text-sm font-weight-bold mb-0">Total Number of Users</h6>
-                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data.total_number_of_users}</p>
+                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data?.total_number_of_users}</p>
                                 </div>
                             </div>
                         </div>

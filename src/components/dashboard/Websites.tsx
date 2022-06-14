@@ -5,11 +5,13 @@ import { Column } from "primereact/column";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
-import { WebsitesService } from "./WebsitesService";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
 
 interface DataProps{
     data : {
-        website: string;
+        websites: any;
         company: string;
         total_number_of_websites: number;
         number_of_active_users: number;
@@ -21,14 +23,23 @@ interface DataProps{
 }
 
 export default function Websites({data} : DataProps){
-    const [websites, setWebsites] = useState();
-
-    const websitesService = new WebsitesService();
+    const [websites, setWebsites] = useState([]);
 
     useEffect(() => {
-        websitesService.getWebsites().then(data => setWebsites(data));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        axios
+        .get(
+          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}websites/`,
+          { withCredentials: true }
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            setWebsites(res.data.websites);
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+    }, []); 
 
     // let percentIncrease: number = ( data.new_websites_this_month / data.total_number_of_websites_last_month ) * 100;
     // let test : number = 0;

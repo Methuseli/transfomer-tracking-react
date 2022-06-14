@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Spinner } from "@chakra-ui/react";
+import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
 
-import { Alert, AlertIcon } from "@chakra-ui/react";
 axios.defaults.withCredentials = true;
 
 export default function Login() {
+  let date = null;
   const [data, setData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
   const navigate = useNavigate();
@@ -35,19 +35,22 @@ export default function Login() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    if (data.email === "" || data.password === "") {
+    if (data.username === "" || data.password === "") {
       setLoading(false);
       setError("Cannot submit an empty form");
       return;
     }
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}login/`,
+        `${process.env.REACT_APP_BASE_URL}api/token/`,
         data,
         { withCredentials: true }
       )
       .then((res) => {
         if (res.status === 200) {
+          localStorage.setItem("refresh", JSON.stringify(res.data['refresh']));
+          document.cookie =
+            `access=${res.data['access']};`;
           setTimeout(() => {
             navigate("/dashboard");
           }, 3000);
@@ -56,7 +59,7 @@ export default function Login() {
       .catch((err) => {
         if (err.statusCode === 404) {
           setTimeout(() => {
-            setError("Incorrect email or password");
+            setError("Incorrect username or password");
             setLoading(false);
           }, 3000);
         } else {
@@ -102,22 +105,22 @@ export default function Login() {
                         Welcome back
                       </h3>
                       <p className="mb-0">
-                        Enter your email and password to sign in
+                        Enter your username and password to sign in
                       </p>
                     </div>
                     <div className="card-body">
                       <form method="POST" onSubmit={handleSubmit}>
                         <>{errorValue}</>
                         <br />
-                        <label>Email</label>
+                        <label>Username</label>
                         <div className="mb-3">
                           <input
-                            type="email"
-                            name="email"
+                            type="text"
+                            name="username"
                             className="form-control"
-                            placeholder="Email"
-                            aria-label="Email"
-                            aria-describedby="email-addon"
+                            placeholder="Username"
+                            aria-label="Username"
+                            aria-describedby="username-addon"
                             onChange={handleChange}
                           />
                         </div>

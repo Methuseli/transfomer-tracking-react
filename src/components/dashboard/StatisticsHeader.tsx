@@ -2,7 +2,7 @@ import React from "react";
 
 interface DataProps{
     data : {
-        website: string;
+        websites: any;
         company: string;
         total_number_of_websites: number;
         number_of_active_users: number;
@@ -22,23 +22,23 @@ export default function StatisticsHeader({data} : DataProps){
             <div className="row">
                 <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div className="card">
-                    <div className="card-body p-3">
-                        <div className="row">
-                        <div className="col-8">
-                            <div className="numbers">
-                            <p className="text-sm mb-0 text-capitalize font-weight-bold">My Websites</p>
-                            <h5 className="font-weight-bolder mb-0">
-                                {data.my_websites}
-                            </h5>
+                        <div className="card-body p-3">
+                            <div className="row">
+                                <div className="col-8">
+                                    <div className="numbers">
+                                        <p className="text-sm mb-0 text-capitalize font-weight-bold">My Websites</p>
+                                        <h5 className="font-weight-bolder mb-0">
+                                            {data.my_websites}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div className="col-4 text-end">
+                                    <div className="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                        <i className="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="col-4 text-end">
-                            <div className="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i className="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
                 <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">

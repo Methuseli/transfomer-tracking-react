@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import StatisticsHeader from "./StatisticsHeader";
-import SubscribersStatistics from "./UserStatistics";
+import UserStatistics from "./UserStatistics";
 import Websites from "./Websites";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 export default function Dashboard(){
     const [data, setData] = useState({
-        website: '',
+        websites: ['no websites yet'],
         company: '',
         total_number_of_websites: 0,
         number_of_active_users: 0,
@@ -20,28 +22,29 @@ export default function Dashboard(){
 
     });
 
+
     useEffect(() => {
-        axios
-      .post(
-        `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}dashboard/`,
-        data,
-        { withCredentials: true }
-      )
-      .then((res) => {
-        if (res.status === 200) {
-          setData(res.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err.data)
-      });
+      axios
+        .get(
+          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}dashboard`,
+          { withCredentials: true }
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            setData(res.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return(
         <>
             <div className="container-fluid py-4">
                 <StatisticsHeader data={data}/>
-                <SubscribersStatistics />
+                <UserStatistics />
                 <Websites data={data}/>
             </div>
         </>
