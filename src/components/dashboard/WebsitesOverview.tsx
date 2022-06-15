@@ -13,6 +13,8 @@ interface DataProps{
 }
 
 export default function WebsitesOverview({data}: DataProps){
+    
+
     return(
         <>
             <div className="col-lg-4 col-md-6">
@@ -32,7 +34,7 @@ export default function WebsitesOverview({data}: DataProps){
                                 </span>
                                 <div className="timeline-content">
                                     <h6 className="text-dark text-sm font-weight-bold mb-0">My latest Website</h6>
-                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data?.websites[0]}</p>
+                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data.websites === [] ? data.websites[0]['url'] : 'no websites yet'}</p>
                                 </div>
                             </div>
                             <div className="timeline-block mb-3">

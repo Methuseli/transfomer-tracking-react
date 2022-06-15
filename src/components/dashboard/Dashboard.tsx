@@ -22,12 +22,17 @@ export default function Dashboard(){
 
     });
 
-
     useEffect(() => {
       axios
         .get(
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}dashboard`,
-          { withCredentials: true }
+          { 
+            headers: {
+              'Authorization': `${localStorage.getItem('access_token')}`,
+              'Content-Type': 'application/json',
+              'accept': 'application/json'
+            } 
+          }
         )
         .then((res) => {
           if (res.status === 200) {

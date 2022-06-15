@@ -8,7 +8,6 @@ import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
 axios.defaults.withCredentials = true;
 
 export default function Login() {
-  let date = null;
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -48,9 +47,8 @@ export default function Login() {
       )
       .then((res) => {
         if (res.status === 200) {
-          localStorage.setItem("refresh", JSON.stringify(res.data['refresh']));
-          document.cookie =
-            `access=${res.data['access']};`;
+          localStorage.setItem("refresh_token", JSON.stringify(res.data['refresh']));
+          localStorage.setItem("access_token", JSON.stringify(res.data['access']))
           setTimeout(() => {
             navigate("/dashboard");
           }, 3000);

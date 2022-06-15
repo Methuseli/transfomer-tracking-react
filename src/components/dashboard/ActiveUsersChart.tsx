@@ -28,7 +28,7 @@ export default function ActiveUsersChart(){
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 datasets: [
                     {
-                        label: 'My First dataset',
+                        label: 'Number of Users',
                         backgroundColor: '#ffffff',
                         data: [
                             res.data['January'],

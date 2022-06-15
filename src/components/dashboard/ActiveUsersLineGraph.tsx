@@ -28,7 +28,7 @@ export default function ActiveUsersLineGraph(){
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 datasets: [
                     {
-                        label: 'My First dataset',
+                        label: 'Number of Users',
                         backgroundColor: '#42A5F5',
                         data: [
                             res.data['January'],
