@@ -8,7 +8,7 @@ axios.defaults.withCredentials = true;
 
 export default function Dashboard(){
     const [data, setData] = useState({
-        websites: ['no websites yet'],
+        // websites: ['no websites yet'],
         company: '',
         total_number_of_websites: 0,
         number_of_active_users: 0,
@@ -19,7 +19,6 @@ export default function Dashboard(){
         my_websites: 0,
         total_surveys: 0,
         surveys_today: 0,
-
     });
 
     useEffect(() => {

@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 
 interface DataProps{
     data : {
-        websites: any;
+        // websites: any;
         company: string;
         total_number_of_websites: number;
         number_of_active_users: number;
