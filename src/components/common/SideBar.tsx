@@ -2,8 +2,10 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { Link } from "react-router-dom";
+import AddCustomQuestionsModal from "../dashboard/AddCustomQuestionsModal";
 
 export default function SideBar() {
+
   return (
     <aside
       className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
@@ -74,6 +76,7 @@ export default function SideBar() {
           </li>
         </ul>
       </div>
+      <AddCustomQuestionsModal />
     </aside>
   );
 }
