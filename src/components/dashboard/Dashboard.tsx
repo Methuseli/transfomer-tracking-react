@@ -21,13 +21,16 @@ export default function Dashboard(){
         surveys_today: 0,
     });
 
+    const token = localStorage.getItem('access_token');
+    const accessToken = token !== null ? JSON.parse(token) : null;
+
     useEffect(() => {
       axios
         .get(
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}dashboard`,
           { 
             headers: {
-              'Authorization': `${localStorage.getItem('access_token')}`,
+              'Authorization': `JWT ${accessToken}`,
               'Content-Type': 'application/json',
               'accept': 'application/json'
             } 

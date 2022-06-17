@@ -88,9 +88,9 @@ export default function AddCustomQuestionsModal(){
         }
         axios
         .post(
-            `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}questions`,
+            `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}questions/`,
             data,
-            { withCredentials: true }
+            {withCredentials: true}
         )
         .then((res) => {
             if (res.status === 200) {

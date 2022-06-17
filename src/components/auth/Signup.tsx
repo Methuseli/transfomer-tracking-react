@@ -41,8 +41,7 @@ export default function Signup(){
     axios
       .post(
         `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}users`,
-        data,
-        { withCredentials: true }
+        data
       )
       .then((res) => {
         if (res.status === 201) {

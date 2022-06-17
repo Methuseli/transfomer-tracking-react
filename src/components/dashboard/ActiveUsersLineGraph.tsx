@@ -20,7 +20,7 @@ export default function ActiveUsersLineGraph(){
         axios
         .get(
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}graph-statistics`,
-          { withCredentials: true }
+          {withCredentials: true}
         )
         .then((res) => {
           if (res.status === 200) {

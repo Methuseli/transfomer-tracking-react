@@ -43,8 +43,7 @@ export default function Login() {
     axios
       .post(
         `${process.env.REACT_APP_BASE_URL}api/token/`,
-        data,
-        { withCredentials: true }
+        data
       )
       .then((res) => {
         if (res.status === 200) {

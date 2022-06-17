@@ -29,7 +29,7 @@ export default function Websites({data} : DataProps){
         axios
         .get(
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}websites`,
-          { withCredentials: true }
+          {withCredentials: true}
         )
         .then((res) => {
           if (res.status === 200) {
