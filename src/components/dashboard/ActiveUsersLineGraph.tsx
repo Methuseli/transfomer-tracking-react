@@ -20,7 +20,7 @@ export default function ActiveUsersLineGraph(){
         axios
         .get(
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}graph-statistics`,
-          { withCredentials: true }
+          {withCredentials: true}
         )
         .then((res) => {
           if (res.status === 200) {
@@ -28,7 +28,7 @@ export default function ActiveUsersLineGraph(){
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 datasets: [
                     {
-                        label: 'My First dataset',
+                        label: 'Number of Users',
                         backgroundColor: '#42A5F5',
                         data: [
                             res.data['January'],

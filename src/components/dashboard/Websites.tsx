@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 
 interface DataProps{
     data : {
-        websites: any;
+        // websites: any;
         company: string;
         total_number_of_websites: number;
         number_of_active_users: number;
@@ -28,12 +28,12 @@ export default function Websites({data} : DataProps){
     useEffect(() => {
         axios
         .get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}websites/`,
-          { withCredentials: true }
+          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}websites`,
+          {withCredentials: true}
         )
         .then((res) => {
           if (res.status === 200) {
-            setWebsites(res.data.websites);
+            setWebsites(res.data);
           }
         })
         .catch((err) => {
@@ -80,7 +80,7 @@ export default function Websites({data} : DataProps){
                                     field=""
                                 />
                                 <Column 
-                                    field="company"
+                                    field="company_name"
                                     header="Owner"
                                 />
                                 <Column 
@@ -89,15 +89,11 @@ export default function Websites({data} : DataProps){
                                 />
                                 <Column
                                     field="ratings_count"
-                                    header="Website Rating"
+                                    header="Number of rating users"
                                 />
                                 <Column
-                                    field="total_users"
-                                    header="Rated by"
-                                />
-                                <Column
-                                    field="created"
-                                    header="Added"
+                                    field="average_rating"
+                                    header="Average rating"
                                 />
                             </DataTable>
                         </div>

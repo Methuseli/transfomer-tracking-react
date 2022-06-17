@@ -1,21 +1,19 @@
-/* eslint-disable react/jsx-no-target-blank */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
 
-axios.defaults.withCredentials = true;
-
-export default function Login() {
-  const [data, setData] = useState({
+export default function Signup(){
+    const [data, setData] = useState({
     username: "",
     password: "",
+    first_name: "",
+    last_name: "",
+    email: "",
   });
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [auth, setAuth] = useState(false);
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     setError("");
@@ -35,62 +33,32 @@ export default function Login() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    if (data.username === "" || data.password === "") {
+    if (data.username === "" || data.password === "" || data.email === "") {
       setLoading(false);
-      setError("Cannot submit an empty form");
+      setError("Fill all the required fields!");
       return;
     }
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}api/token/`,
+        `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}users`,
         data
       )
       .then((res) => {
-        if (res.status === 200) {
-          localStorage.setItem("refresh_token", JSON.stringify(res.data['refresh']));
-          localStorage.setItem("access_token", JSON.stringify(res.data['access']));
-          setAuth(true);
+        if (res.status === 201) {
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/");
           }, 3000);
         }
       })
       .catch((err) => {
-        if (err.statusCode === 404) {
-          setTimeout(() => {
-            setError("Incorrect username or password");
-            setLoading(false);
-          }, 3000);
-        } else {
+        console.log(err);
           setTimeout(() => {
             setError("Something went wrong. Try again");
             setLoading(false);
           }, 3000);
         }
-      });
+      );
   };
-  
-  useEffect(() => {
-    axios
-        .get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}user-data`,
-          { 
-            headers: {
-              'Authorization': `${localStorage.getItem('access_token')}`,
-              'Content-Type': 'application/json',
-              'accept': 'application/json'
-            } 
-          }
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            localStorage.setItem("user", JSON.stringify(res.data));
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-  }, [auth]);
 
   const hasError = error === "";
 
@@ -104,7 +72,7 @@ export default function Login() {
       color="blue.500"
     />
   ) : (
-    "SIGN IN"
+    "Sign Up"
   );
 
   return (
@@ -123,10 +91,10 @@ export default function Login() {
                   <div className="card card-plain mt-8">
                     <div className="card-header pb-0 text-left bg-transparent">
                       <h3 className="font-weight-bolder text-info text-gradient">
-                        Welcome back
+                        Welcome
                       </h3>
                       <p className="mb-0">
-                        Enter your username and password to sign in
+                        Fill the required data to sign up
                       </p>
                     </div>
                     <div className="card-body">
@@ -157,6 +125,42 @@ export default function Login() {
                             onChange={handleChange}
                           />
                         </div>
+                        <label>First Name</label>
+                        <div className="mb-3">
+                          <input
+                            type="text"
+                            name="first_name"
+                            className="form-control"
+                            placeholder="First Name"
+                            aria-label="First Name"
+                            aria-describedby="first_name-addon"
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <label>Last Name</label>
+                        <div className="mb-3">
+                          <input
+                            type="text"
+                            name="last_name"
+                            className="form-control"
+                            placeholder="Last Name"
+                            aria-label="Last Name"
+                            aria-describedby="last_name-addon"
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <label>Email</label>
+                        <div className="mb-3">
+                          <input
+                            type="email"
+                            name="email"
+                            className="form-control"
+                            placeholder="Email"
+                            aria-label="Email"
+                            aria-describedby="email-addon"
+                            onChange={handleChange}
+                          />
+                        </div>
                         <div className="form-check form-switch">
                           <input
                             className="form-check-input"
@@ -183,11 +187,12 @@ export default function Login() {
                     </div>
                     <div className="card-footer text-center pt-0 px-lg-2 px-1">
                       <p className="mb-4 text-sm mx-auto">
-                        Don't have an account?
-                        <Link to="/signup"
+                        Already have an account?
+                        <Link
+                            to="/"
                           className="text-info text-gradient font-weight-bold"
                         >
-                          Sign up
+                          Login
                         </Link>
                       </p>
                     </div>

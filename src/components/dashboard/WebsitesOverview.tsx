@@ -3,7 +3,7 @@ import 'primeicons/primeicons.css';
 
 interface DataProps{
     data : {
-        websites: any;
+        // websites: any;
         company: string;
         total_number_of_websites: number;
         number_of_active_users: number;
@@ -13,6 +13,8 @@ interface DataProps{
 }
 
 export default function WebsitesOverview({data}: DataProps){
+    
+
     return(
         <>
             <div className="col-lg-4 col-md-6">
@@ -26,15 +28,15 @@ export default function WebsitesOverview({data}: DataProps){
                     </div>
                     <div className="card-body p-3">
                         <div className="timeline timeline-one-side">
-                            <div className="timeline-block mb-3">
+                            {/* <div className="timeline-block mb-3">
                                 <span className="timeline-step">
                                     <i className="pi pi-globe text-success text-gradient"></i>
                                 </span>
                                 <div className="timeline-content">
-                                    <h6 className="text-dark text-sm font-weight-bold mb-0">My latest Website</h6>
-                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data?.websites[0]}</p>
+                                    <h6 className="text-dark text-sm font-weight-bold mb-0">My Website</h6>
+                                    <p className="text-secondary font-weight-bold text-xs mt-1 mb-0">{data.websites !== [] ? data.websites[0]['url'] : 'no websites yet'}</p>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="timeline-block mb-3">
                                 <span className="timeline-step">
                                     <i className="pi pi-star-fill text-success text-gradient"></i>
