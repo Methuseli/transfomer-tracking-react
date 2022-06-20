@@ -4,9 +4,9 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-export default function ActiveUsersChart(){
+export default function Questionaires(){
     const [basicData, setBasicData] = useState({
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        labels: ['10 Days ago', '', '', '', '', '', '', '', '', '', 'Yesterday', 'Today'],
         datasets: [
             {
                 label: '',
@@ -16,33 +16,40 @@ export default function ActiveUsersChart(){
         ]
     });
 
+    const token = localStorage.getItem('access_token');
+    const accessToken = token !== null ? JSON.parse(token) : null;
+
     useEffect(() => {
         axios
         .get(
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}graph-statistics`,
-          {withCredentials: true}
+          {
+            headers: {
+              'Authorization': `JWT ${accessToken}`,
+              'Content-Type': 'application/json',
+              'accept': 'application/json'
+            } 
+          }
         )
         .then((res) => {
           if (res.status === 200) {
             setBasicData({
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                labels: ['10 Days ago', '', '', '', '', '', '', '', '', '', 'Yesterday', 'Today'],
                 datasets: [
                     {
-                        label: 'Number of Users',
+                        label: 'Number of Questionaires per day',
                         backgroundColor: '#ffffff',
                         data: [
-                            res.data['January'],
-                            res.data['February'],
-                            res.data['March'],
-                            res.data['April'],
-                            res.data['May'],
-                            res.data['June'],
-                            res.data['July'],
-                            res.data['August'],
-                            res.data['September'],
-                            res.data['October'],
-                            res.data['November'],
-                            res.data['December']
+                            res.data['10'],
+                            res.data['09'],
+                            res.data['08'],
+                            res.data['07'],
+                            res.data['06'],
+                            res.data['05'],
+                            res.data['04'],
+                            res.data['03'],
+                            res.data['yesterday'],
+                            res.data['today']
                         ]
                     }
                 ]
@@ -52,6 +59,7 @@ export default function ActiveUsersChart(){
         .catch((err) => {
           console.log(err)
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getLightTheme = () => {

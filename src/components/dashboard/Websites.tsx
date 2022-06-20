@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 
 interface DataProps{
     data : {
-        // websites: any;
+        // questionaires: any;
         company: string;
         total_number_of_websites: number;
         number_of_active_users: number;
@@ -23,22 +23,32 @@ interface DataProps{
 }
 
 export default function Websites({data} : DataProps){
-    const [websites, setWebsites] = useState([]);
+    const [questionaires, setQuestionaires] = useState([]);
+
+    const token = localStorage.getItem('access_token');
+    const accessToken = token !== null ? JSON.parse(token) : null;
 
     useEffect(() => {
         axios
         .get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}websites`,
-          {withCredentials: true}
+          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}questionaires`,
+          {
+            headers: {
+              'Authorization': `JWT ${accessToken}`,
+              'Content-Type': 'application/json',
+              'accept': 'application/json'
+            }
+          }
         )
         .then((res) => {
           if (res.status === 200) {
-            setWebsites(res.data);
+            setQuestionaires(res.data);
           }
         })
         .catch((err) => {
           console.log(err)
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); 
 
     // let percentIncrease: number = ( data.new_websites_this_month / data.total_number_of_websites_last_month ) * 100;
@@ -66,7 +76,7 @@ export default function Websites({data} : DataProps){
                         </div>
                         <div className="card-body px-0 pb-2">
                             <DataTable
-                                value={websites}
+                                value={questionaires}
                                 filterDisplay="row"
                                 className="text-danger"
                                 style={{ fontSize: "12px" }}

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Spinner, Modal, useDisclosure, Button, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter, Alert, AlertIcon, Select } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Spinner, Modal, useDisclosure, Button, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter, Alert, AlertIcon } from "@chakra-ui/react";
 import axios from "axios";
 
 
-export default function AddCustomQuestionsModal(){
+export default function AddWebsite(){
     const { isOpen, onOpen, onClose } = useDisclosure();
 
 
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
-        question: "",
-        website: ""
+        name: "",
+        url: ""
     })
 
     const handleChange = (e: { target: { name: any; value: any } }) => {
@@ -23,39 +23,6 @@ export default function AddCustomQuestionsModal(){
 
     const [error, setError] = useState("");
     const [successful, setSuccessful] = useState(true);
-    const [websites, setWebsites] = useState([{
-        id: "",
-        company_name: "",
-        created: "",
-        url: "",
-        average_rating: 0,
-        ratings_count: 0,
-        website_name: "",
-        company: ""
-    }]);
-
-    useEffect(() => {
-        // let user = localStorage.getItem("user")
-        axios
-        .get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}websites`,
-          { 
-            headers: {
-              'Authorization': `${localStorage.getItem('access_token')}`,
-              'Content-Type': 'application/json',
-              'accept': 'application/json'
-            } 
-          }
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            setWebsites(res.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-    }, [])
 
     const errorComponent = (
         <Alert status="error">
@@ -78,19 +45,28 @@ export default function AddCustomQuestionsModal(){
 
     const successComponent = successful ? "" : success;
 
+    const token = localStorage.getItem('access_token');
+    const accessToken = token !== null ? JSON.parse(token) : null;
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);
-        if (data.question === "" || data.website === "") {
+        if (data.name === "" || data.url === "") {
         setLoading(false);
         setError("Fill all the required fields!");
         return;
         }
         axios
         .post(
-            `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}questions/`,
+            `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}websites/`,
             data,
-            {withCredentials: true}
+            {
+                headers: {
+                    'Authorization': `JWT ${accessToken}`,
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                }  
+            }
         )
         .then((res) => {
             if (res.status === 200) {
@@ -118,12 +94,12 @@ export default function AddCustomQuestionsModal(){
         color="blue.500"
         />
     ) : (
-        "Add Question"
+        "Add Website"
     );
 
     return(
         <>
-            <Button onClick={onOpen}>Add Custom Question</Button>
+            <Button onClick={onOpen}>Add Your website</Button>
 
             <Modal
                 isOpen={isOpen}
@@ -133,22 +109,17 @@ export default function AddCustomQuestionsModal(){
                 <ModalContent>
                     <>{errorValue}</>
                     <>{successComponent}</>
-                    <ModalHeader>Add a question to your website</ModalHeader>
+                    <ModalHeader>Add website</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <form onSubmit={handleSubmit}>
                             <FormControl>
-                                <FormLabel>Question</FormLabel>
-                                <Input type="text" name="question" placeholder="Question" onChange={handleChange} />
+                                <FormLabel>Website Url</FormLabel>
+                                <Input type="text" name="url" placeholder="Website Url" onChange={handleChange} />
                             </FormControl>
                             <FormControl>
-                                <FormLabel>Website</FormLabel>
-                                <Select id='website' name="website" placeholder='Select Website' onChange={handleChange}>
-                                    {websites.map((website) =>
-                                            <option key={website.id} value={website.id}>{website["url"]}</option>
-                                        )
-                                    }
-                                </Select>
+                                <FormLabel>Website Name</FormLabel>
+                                <Input type="text" name="name" placeholder="Website Name" onChange={handleChange} />
                             </FormControl>
                             <Button colorScheme='blue' mr={3} type="submit" style={{marginTop : "10px"}}>
                                     {isLoading}
@@ -165,4 +136,4 @@ export default function AddCustomQuestionsModal(){
     )
 }
 
-// export default forwardRef(AddCustomQuestionsModal)
+// export default forwardRef(AddWebsite)

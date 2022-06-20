@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { Link } from "react-router-dom";
-import AddCustomQuestionsModal from "../dashboard/AddCustomQuestionsModal";
+import AddWebsite from "../dashboard/AddWebsite";
 
 export default function SideBar() {
 
@@ -76,7 +76,7 @@ export default function SideBar() {
           </li>
         </ul>
       </div>
-      <AddCustomQuestionsModal />
+      <AddWebsite />
     </aside>
   );
 }

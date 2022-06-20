@@ -1,5 +1,5 @@
 import React from "react";
-import ActiveUsersLineGraph from "./ActiveUsersLineGraph";
+import QuestionRatings from "./QuestionRatings";
 
 export default function UserChart(){
     return(
@@ -11,7 +11,7 @@ export default function UserChart(){
                     </div>
                     <div className="card-body p-3">
                         <div className="chart">
-                            <ActiveUsersLineGraph />
+                            <QuestionRatings />
                         </div>
                     </div>
                 </div>
