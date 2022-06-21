@@ -17,6 +17,9 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [auth, setAuth] = useState(false);
 
+  const token = localStorage.getItem('access_token');
+  const accessToken = token !== null ? JSON.parse(token) : null;
+
   const handleChange = (e: { target: { name: any; value: any } }) => {
     setError("");
     setData({
@@ -76,7 +79,7 @@ export default function Login() {
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}user-data`,
           { 
             headers: {
-              'Authorization': `${localStorage.getItem('access_token')}`,
+              'Authorization': `JWT ${accessToken}`,
               'Content-Type': 'application/json',
               'accept': 'application/json'
             } 
@@ -90,6 +93,7 @@ export default function Login() {
         .catch((err) => {
           console.log(err)
         });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth]);
 
   const hasError = error === "";

@@ -1,6 +1,6 @@
 import React from "react";
 import SubscriberChart from "./UserChart";
-import ActiveUsersChart from "./ActiveUsersChart";
+import Questionaires from "./Questionaires";
 
 
 export default function UserStatistics(){
@@ -12,7 +12,7 @@ export default function UserStatistics(){
                   <div className="card-body p-3">
                     <div className="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
                       <div className="chart">
-                        <ActiveUsersChart />
+                        <Questionaires />
                       </div>
                     </div>
                   </div>
