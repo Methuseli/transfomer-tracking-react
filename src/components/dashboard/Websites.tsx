@@ -6,6 +6,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import axios from "axios";
+import ViewQuestionaire from "./ViewQuestionaire";
 
 axios.defaults.withCredentials = true;
 
@@ -27,6 +28,14 @@ export default function Websites({data} : DataProps){
 
     const token = localStorage.getItem('access_token');
     const accessToken = token !== null ? JSON.parse(token) : null;
+
+    const viewQuestionaire = (record : any) => {
+        return(
+            <>
+                <ViewQuestionaire data={record} />
+            </>
+        )
+    }
 
     useEffect(() => {
         axios
@@ -62,14 +71,14 @@ export default function Websites({data} : DataProps){
                         <div className="card-header pb-0">
                             <div className="row">
                                 <div className="col-lg-6 col-7">
-                                    <h6>Websites</h6>
+                                    <h6>Questionaires</h6>
                                     <p className="text-sm mb-0">
                                         {/* {{ percentIncrease === test ? 
                                             <i className="pi pi-minus text-info"></i> :
                                             <i className="pi pi-arrow-up text-info"></i>
                                         }} */}
                                         
-                                        <span className="font-weight-bold ms-1">{data.new_websites_this_month}</span> this month
+                                        <span className="font-weight-bold ms-1">{data.new_websites_this_month}</span> websites this month
                                     </p>
                                 </div>
                             </div>
@@ -104,6 +113,10 @@ export default function Websites({data} : DataProps){
                                 <Column
                                     field="average_rating"
                                     header="Average rating"
+                                />
+                                <Column
+                                    header="View"
+                                    body={viewQuestionaire}
                                 />
                             </DataTable>
                         </div>
