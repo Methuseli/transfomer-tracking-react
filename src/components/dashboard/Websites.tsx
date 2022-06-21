@@ -99,20 +99,8 @@ export default function Websites({data} : DataProps){
                                     field=""
                                 />
                                 <Column 
-                                    field="company_name"
-                                    header="Owner"
-                                />
-                                <Column 
-                                    field="url"
-                                    header="Website Url"
-                                />
-                                <Column
-                                    field="ratings_count"
-                                    header="Number of rating users"
-                                />
-                                <Column
-                                    field="average_rating"
-                                    header="Average rating"
+                                    field="created"
+                                    header="Day of survey"
                                 />
                                 <Column
                                     header="View"
