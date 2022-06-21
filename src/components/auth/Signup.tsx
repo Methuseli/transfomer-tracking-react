@@ -10,6 +10,7 @@ export default function Signup(){
     first_name: "",
     last_name: "",
     email: "",
+    company_name: "",
   });
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -33,7 +34,7 @@ export default function Signup(){
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    if (data.username === "" || data.password === "" || data.email === "") {
+    if (data.username === "" || data.password === "" || data.email === "" || data.company_name === "") {
       setLoading(false);
       setError("Fill all the required fields!");
       return;
@@ -146,6 +147,18 @@ export default function Signup(){
                             placeholder="Last Name"
                             aria-label="Last Name"
                             aria-describedby="last_name-addon"
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <label>Company Name</label>
+                        <div className="mb-3">
+                          <input
+                            type="text"
+                            name="company_name"
+                            className="form-control"
+                            placeholder="Company Name"
+                            aria-label="Compnay Name"
+                            aria-describedby="company_name-addon"
                             onChange={handleChange}
                           />
                         </div>
