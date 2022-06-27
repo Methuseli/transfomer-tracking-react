@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 export default function Questionaires(){
     const [basicData, setBasicData] = useState({
-        labels: ['10 Days ago', '', '', '', '', '', '', '', '', '', 'Yesterday', 'Today'],
+        labels: ['10 Days ago', '', '', '', '', '', '', '', 'Yesterday', 'Today'],
         datasets: [
             {
                 label: '',
@@ -34,10 +34,10 @@ export default function Questionaires(){
         .then((res) => {
           if (res.status === 200) {
             setBasicData({
-                labels: ['10 Days ago', '', '', '', '', '', '', '', '', '', 'Yesterday', 'Today'],
+                labels: ['10 Days ago', '', '', '', '', '', '', '', 'Yesterday', 'Today'],
                 datasets: [
                     {
-                        label: 'Number of Questionaires per day',
+                        label: 'Number of Questionaires',
                         backgroundColor: '#ffffff',
                         data: [
                             res.data['10'],
