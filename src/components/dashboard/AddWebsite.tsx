@@ -72,6 +72,7 @@ export default function AddWebsite(){
             if (res.status === 200) {
                 setTimeout(() => {
                     setSuccessful(true);
+                    setLoading(false);
                 }, 3000);
             }
         })

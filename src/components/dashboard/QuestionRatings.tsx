@@ -106,7 +106,7 @@ export default function QuestionRatings(){
                     datasets: [
                         {
                             label: 'Question 1',
-                            backgroundColor: '#B0E0E6',
+                            backgroundColor: '#00E006',
                             data: [
                                 answer_ratings[9]['1'],
                                 answer_ratings[8]['1'],
@@ -119,12 +119,12 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['1'],
                                 answer_ratings[0]['1'],
                             ],
-                            borderColor: '#B0E0E6',
+                            borderColor: '#00E006',
                             tension: .4
                         },
                         {
                             label: 'Question 2',
-                            backgroundColor: '#5F9EA0',
+                            backgroundColor: '#5F00A0',
                             data: [
                                 answer_ratings[9]['2'],
                                 answer_ratings[8]['2'],
@@ -137,12 +137,12 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['2'],
                                 answer_ratings[0]['2'],
                             ],
-                            borderColor: '#5F9EA0',
+                            borderColor: '#5F00A0',
                             tension: .4
                         },
                         {
                             label: 'Question 3',
-                            backgroundColor: '#4682B4',
+                            backgroundColor: '#468200',
                             data: [
                                 answer_ratings[9]['3'],
                                 answer_ratings[8]['3'],
@@ -155,12 +155,12 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['3'],
                                 answer_ratings[0]['3'],
                             ],
-                            borderColor: '#4682B4',
+                            borderColor: '#468200',
                             tension: .4
                         },
                         {
                             label: 'Question 4',
-                            backgroundColor: '#6495ED',
+                            backgroundColor: '#640000',
                             data: [
                                 answer_ratings[9]['4'],
                                 answer_ratings[8]['4'],
@@ -173,12 +173,12 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['4'],
                                 answer_ratings[0]['4'],
                             ],
-                            borderColor: '#6495ED',
+                            borderColor: '#640000',
                             tension: .4
                         },
                         {
                             label: 'Question 5',
-                            backgroundColor: '#00BFFF',
+                            backgroundColor: '#0000FF',
                             data: [
                                 answer_ratings[9]['5'],
                                 answer_ratings[8]['5'],
@@ -191,12 +191,12 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['5'],
                                 answer_ratings[0]['5'],
                             ],
-                            borderColor: '#00BFFF',
+                            borderColor: '#0000FF',
                             tension: .4
                         },
                         {
                             label: 'Question 6',
-                            backgroundColor: '#1E90FF',
+                            backgroundColor: '#000000',
                             data: [
                                 answer_ratings[9]['6'],
                                 answer_ratings[8]['6'],
@@ -209,12 +209,12 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['6'],
                                 answer_ratings[0]['6'],
                             ],
-                            borderColor: '#1E90FF',
+                            borderColor: '#000000',
                             tension: .4
                         },
                         {
                             label: 'Question 7',
-                            backgroundColor: '#ADD8E6',
+                            backgroundColor: '#FF0033',
                             data: [
                                 answer_ratings[9]['7'],
                                 answer_ratings[8]['7'],
@@ -227,12 +227,12 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['7'],
                                 answer_ratings[0]['7'],
                             ],
-                            borderColor: '#ADD8E6',
+                            borderColor: '#FF0033',
                             tension: .4
                         },
                         {
                             label: 'Question 8',
-                            backgroundColor: '#87CEEB',
+                            backgroundColor: '#00F8A0',
                             data: [
                                 answer_ratings[9]['8'],
                                 answer_ratings[8]['8'],
@@ -245,7 +245,7 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['8'],
                                 answer_ratings[0]['8'],
                             ],
-                            borderColor: '#87CEEB',
+                            borderColor: '#00F8A0',
                             tension: .4
                         },
                         {
@@ -268,7 +268,7 @@ export default function QuestionRatings(){
                         },
                         {
                             label: 'Question 10',
-                            backgroundColor: '#000080',
+                            backgroundColor: '#8E8E8E',
                             data: [
                                 answer_ratings[9]['10'],
                                 answer_ratings[8]['10'],
@@ -281,7 +281,7 @@ export default function QuestionRatings(){
                                 answer_ratings[1]['10'],
                                 answer_ratings[0]['10'],
                             ],
-                            borderColor: '#000080',
+                            borderColor: '#8E8E8E',
                             tension: .4
                         }
                     ]

@@ -15,7 +15,6 @@ export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [auth, setAuth] = useState(false);
 
   const token = localStorage.getItem('access_token');
   const accessToken = token !== null ? JSON.parse(token) : null;
@@ -52,7 +51,25 @@ export default function Login() {
         if (res.status === 200) {
           localStorage.setItem("refresh_token", JSON.stringify(res.data['refresh']));
           localStorage.setItem("access_token", JSON.stringify(res.data['access']));
-          setAuth(true);
+          axios
+            .get(
+              `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}user-data`,
+              { 
+                headers: {
+                  'Authorization': `JWT ${res.data['access']}`,
+                  'Content-Type': 'application/json',
+                  'accept': 'application/json'
+                } 
+              }
+            )
+            .then((res) => {
+              if (res.status === 200) {
+                localStorage.setItem("user", JSON.stringify(res.data));
+              }
+            })
+            .catch((err) => {
+              console.log(err)
+            });
           setTimeout(() => {
             navigate("/dashboard");
           }, 3000);
@@ -72,29 +89,6 @@ export default function Login() {
         }
       });
   };
-  
-  useEffect(() => {
-    axios
-        .get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}user-data`,
-          { 
-            headers: {
-              'Authorization': `JWT ${accessToken}`,
-              'Content-Type': 'application/json',
-              'accept': 'application/json'
-            } 
-          }
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            localStorage.setItem("user", JSON.stringify(res.data));
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth]);
 
   const hasError = error === "";
 

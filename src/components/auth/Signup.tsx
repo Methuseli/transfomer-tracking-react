@@ -157,7 +157,7 @@ export default function Signup(){
                             name="company_name"
                             className="form-control"
                             placeholder="Company Name"
-                            aria-label="Compnay Name"
+                            aria-label="Company Name"
                             aria-describedby="company_name-addon"
                             onChange={handleChange}
                           />
