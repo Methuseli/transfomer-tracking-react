@@ -28,12 +28,12 @@ export default function Dashboard(){
       axios
         .get(
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}dashboard`,
-          { 
+          {
             headers: {
-              'Authorization': `JWT ${accessToken}`,
-              'Content-Type': 'application/json',
-              'accept': 'application/json'
-            } 
+              Authorization: `JWT ${accessToken}`,
+              "Content-Type": "application/json",
+              accept: "application/json",
+            },
           }
         )
         .then((res) => {
@@ -42,7 +42,7 @@ export default function Dashboard(){
           }
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
