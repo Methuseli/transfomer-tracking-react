@@ -48,7 +48,7 @@ export default function AddWebsite(){
     const token = localStorage.getItem('access_token');
     const accessToken = token !== null ? JSON.parse(token) : null;
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
         setLoading(true);
         if (data.name === "" || data.url === "") {
@@ -122,7 +122,7 @@ export default function AddWebsite(){
                     onChange={handleChange}
                   />
                 </FormControl>
-                <br/>
+                <br />
                 <FormControl>
                   <FormLabel>Website Name</FormLabel>
                   <Input
@@ -137,8 +137,12 @@ export default function AddWebsite(){
 
             <ModalFooter>
               <div className="row">
-                <div className="col-md-5 ml-5" style={{ marginLeft: "50px" }}>
-                  <button className="btn btn-primary ms-3" type="submit">
+                <div className="col-md-5 ml-5" style={{ marginLeft: "20px" }}>
+                  <button
+                    className="btn btn-primary ms-3"
+                    onClick={handleSubmit}
+                    type="submit"
+                  >
                     {isLoading}
                   </button>
                 </div>
