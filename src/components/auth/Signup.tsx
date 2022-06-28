@@ -94,9 +94,7 @@ export default function Signup(){
                       <h3 className="font-weight-bolder text-info text-gradient">
                         Welcome
                       </h3>
-                      <p className="mb-0">
-                        Fill the required data to sign up
-                      </p>
+                      <p className="mb-0">Fill the required data to sign up</p>
                     </div>
                     <div className="card-body">
                       <form method="POST" onSubmit={handleSubmit}>
@@ -202,7 +200,7 @@ export default function Signup(){
                       <p className="mb-4 text-sm mx-auto">
                         Already have an account?
                         <Link
-                            to="/"
+                          to="/"
                           className="text-info text-gradient font-weight-bold"
                         >
                           Login
@@ -217,7 +215,7 @@ export default function Signup(){
                       className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                       style={{
                         backgroundImage:
-                          "url('../assets/img/curved-images/fx_bg.webp')",
+                          "url('../assets/img/curved-images/survey_form.jpg')",
                       }}
                     ></div>
                   </div>

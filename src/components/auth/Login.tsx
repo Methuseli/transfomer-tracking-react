@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
@@ -15,9 +15,6 @@ export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const token = localStorage.getItem('access_token');
-  const accessToken = token !== null ? JSON.parse(token) : null;
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     setError("");
@@ -197,7 +194,7 @@ export default function Login() {
                       className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                       style={{
                         backgroundImage:
-                          "url('../assets/img/curved-images/fx_bg.webp')",
+                          "url('../assets/img/curved-images/survey_form.jpg')",
                       }}
                     ></div>
                   </div>
