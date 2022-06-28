@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Spinner, Modal, useDisclosure, Button, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter, Alert, AlertIcon } from "@chakra-ui/react";
+import { Spinner, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Input, ModalFooter, Alert, AlertIcon } from "@chakra-ui/react";
 import axios from "axios";
 
 
@@ -95,46 +95,65 @@ export default function AddWebsite(){
         color="blue.500"
         />
     ) : (
-        "Add Website"
+        "Submit"
     );
 
-    return(
-        <>
-            <Button onClick={onOpen}>Add Your website</Button>
+    return (
+      <>
+        <button className="btn btn-primary" onClick={onOpen}>
+          Add Your website
+        </button>
 
-            <Modal
-                isOpen={isOpen}
-                onClose={onClose}
-            >
-                <ModalOverlay />
-                <ModalContent>
-                    <>{errorValue}</>
-                    <>{successComponent}</>
-                    <ModalHeader>Add website</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody pb={6}>
-                        <form onSubmit={handleSubmit}>
-                            <FormControl>
-                                <FormLabel>Website Url</FormLabel>
-                                <Input type="text" name="url" placeholder="Website Url" onChange={handleChange} />
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Website Name</FormLabel>
-                                <Input type="text" name="name" placeholder="Website Name" onChange={handleChange} />
-                            </FormControl>
-                            <Button colorScheme='blue' mr={3} type="submit" style={{marginTop : "10px"}}>
-                                    {isLoading}
-                            </Button>
-                        </form>
-                    </ModalBody>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <>{errorValue}</>
+            <>{successComponent}</>
+            <ModalHeader className="h4">Add website</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <form onSubmit={handleSubmit}>
+                <FormControl>
+                  <FormLabel className="">Website Url</FormLabel>
+                  <Input
+                    type="text"
+                    name="url"
+                    placeholder="Website Url"
+                    onChange={handleChange}
+                  />
+                </FormControl>
+                <br/>
+                <FormControl>
+                  <FormLabel>Website Name</FormLabel>
+                  <Input
+                    type="text"
+                    name="name"
+                    placeholder="Website Name"
+                    onChange={handleChange}
+                  />
+                </FormControl>
+              </form>
+            </ModalBody>
 
-                    <ModalFooter>
-                        <Button onClick={onClose}>Cancel</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-        </>
-    )
+            <ModalFooter>
+              <div className="row">
+                <div className="col-md-5 ml-5" style={{ marginLeft: "50px" }}>
+                  <button className="btn btn-primary ms-3" type="submit">
+                    {isLoading}
+                  </button>
+                </div>
+
+                <div className="col-md-5">
+                  <button className="btn btn-secondary" onClick={onClose}>
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    );
 }
 
 // export default forwardRef(AddWebsite)

@@ -49,36 +49,38 @@ export default function ViewQuestionaire({data} : DataProps){
 
     
 
-    return(
-        <>
-            <Button onClick={onOpen}>View Questionaire</Button>
+    return (
+      <>
+        <button className="btn btn-secondary" onClick={onOpen}>
+          View Questionaire
+        </button>
 
-            <Modal
-                isOpen={isOpen}
-                onClose={onClose}
-            >
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Questionaire Information</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody pb={6}>
-                        {questions.map((question) =>
-                            <>
-                                <div className="card">
-                                    <p>{question?.question_text}</p>
-                                    <div>{question?.rating} stars / 5</div>
-                                </div>
-                            </>
-                        )}
-                    </ModalBody>
+        <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader className="h3">Questionaire Information</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              {questions.map((question) => (
+                <>
+                  <div className="card px-4">
+                    <p className="h4">{question?.question_text}?</p>
+                    <div className="text-muted">
+                      {question?.rating} stars / 5
+                    </div>
+                  </div>
+                  <br />
+                </>
+              ))}
+            </ModalBody>
 
-                    <ModalFooter>
-                        <Button onClick={onClose}>Cancel</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-        </>
-    )
+            <ModalFooter>
+              <Button onClick={onClose}>Cancel</Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </>
+    );
 }
 
 // export default forwardRef(ViewQuestinaire)
