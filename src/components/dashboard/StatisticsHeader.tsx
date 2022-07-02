@@ -1,19 +1,19 @@
 import React from "react";
 
-interface DataProps{
-    data : {
-        // websites: any;
-        company: string;
-        total_number_of_websites: number;
-        number_of_active_users: number;
-        total_number_of_companies: number;
-        total_number_of_users: number;
-        new_websites_this_month: number;
-        total_number_of_websites_last_month: number;
-        my_websites: number,
-        total_surveys: number,
-        surveys_today: number,
-    };
+interface DataProps {
+  data: {
+    // websites: any;
+    company: string;
+    total_number_of_websites: number;
+    suggestions: number;
+    total_number_of_companies: number;
+    total_number_of_users: number;
+    new_websites_this_month: number;
+    total_number_of_websites_last_month: number;
+    my_websites: number;
+    total_surveys: number;
+    surveys_today: number;
+  };
 }
 
 export default function StatisticsHeader({data} : DataProps){

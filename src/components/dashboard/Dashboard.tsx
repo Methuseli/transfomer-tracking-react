@@ -8,17 +8,17 @@ axios.defaults.withCredentials = true;
 
 export default function Dashboard(){
     const [data, setData] = useState({
-        // websites: ['no websites yet'],
-        company: '',
-        total_number_of_websites: 0,
-        number_of_active_users: 0,
-        total_number_of_companies: 0,
-        total_number_of_users: 0,
-        new_websites_this_month: 0,
-        total_number_of_websites_last_month: 0,
-        my_websites: 0,
-        total_surveys: 0,
-        surveys_today: 0,
+      // websites: ['no websites yet'],
+      company: "",
+      total_number_of_websites: 0,
+      suggestions: 0,
+      total_number_of_companies: 0,
+      total_number_of_users: 0,
+      new_websites_this_month: 0,
+      total_number_of_websites_last_month: 0,
+      my_websites: 0,
+      total_surveys: 0,
+      surveys_today: 0,
     });
 
     const token = localStorage.getItem('access_token');

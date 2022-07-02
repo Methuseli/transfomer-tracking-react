@@ -10,17 +10,17 @@ import ViewQuestionaire from "./ViewQuestionaire";
 
 axios.defaults.withCredentials = true;
 
-interface DataProps{
-    data : {
-        // questionaires: any;
-        company: string;
-        total_number_of_websites: number;
-        number_of_active_users: number;
-        total_number_of_companies: number;
-        total_number_of_users: number;
-        new_websites_this_month: number;
-        total_number_of_websites_last_month: number;
-    };
+interface DataProps {
+  data: {
+    // questionaires: any;
+    company: string;
+    total_number_of_websites: number;
+    suggestions: number;
+    total_number_of_companies: number;
+    total_number_of_users: number;
+    new_websites_this_month: number;
+    total_number_of_websites_last_month: number;
+  };
 }
 
 export default function Websites({data} : DataProps){
