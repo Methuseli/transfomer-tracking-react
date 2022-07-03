@@ -1,10 +1,26 @@
-# Getting Started with Create React App
+# Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+The project feeds off the django backend and is connected to it via rest API. The react fronented is written in typescript, a superset of javascript
+to make the development experience better and having errors appear before runtime.
+
+The application uses Json web tokens for authentication and communicates with the server via https for safety. 
+
+In the dashboard, institutions sign up and sign in to the dashboard. Here they can add their website. They can also view explicit suggestions from users on
+how they can improve their website. 
+
+The code base uses primereact and the aid of chakra UI for asthetics and visual representation of the data via graphs. 
+
+The  data tables implement lazy loading for perfomance considerations.
+
+
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Installs all dependencies in the package.json file.
 
 ### `npm start`
 
@@ -13,11 +29,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
