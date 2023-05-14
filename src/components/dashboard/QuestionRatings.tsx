@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true;
 export default function QuestionRatings(){
     const [basicData, setBasicData] = useState(
         {
-        labels: ['10 Days ago', '', '', '', '', '', '', '', 'Yesterday', 'Today'],
+        labels: ['10 Minutes ago', '', '', '', '', '', '', '', 'Yesterday', 'Today'],
         datasets: [
             {
                 label: '',
