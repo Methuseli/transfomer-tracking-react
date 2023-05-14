@@ -45,7 +45,7 @@ export default function SuggestionsTable() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // let percentIncrease: number = ( data.new_websites_this_month / data.total_number_of_websites_last_month ) * 100;
+  // let percentIncrease: number = ( data.new_  websites_this_month / data.total_number_of_websites_last_month ) * 100;
   // let test : number = 0;
 
   return (

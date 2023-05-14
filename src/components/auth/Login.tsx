@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Alert, AlertIcon, Spinner } from "@chakra-ui/react";
 
@@ -53,7 +53,7 @@ export default function Login() {
               `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}user-data`,
               { 
                 headers: {
-                  'Authorization': `JWT ${res.data['access']}`,
+                  'Authorization': `Bearer ${res.data['access']}`,
                   'Content-Type': 'application/json',
                   'accept': 'application/json'
                 } 
@@ -176,7 +176,7 @@ export default function Login() {
                         </div>
                       </form>
                     </div>
-                    <div className="card-footer text-center pt-0 px-lg-2 px-1">
+                    {/* <div className="card-footer text-center pt-0 px-lg-2 px-1">
                       <p className="mb-4 text-sm mx-auto">
                         Don't have an account?
                         <Link to="/signup"
@@ -185,7 +185,7 @@ export default function Login() {
                           Sign up
                         </Link>
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -194,7 +194,7 @@ export default function Login() {
                       className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                       style={{
                         backgroundImage:
-                          "url('../assets/img/curved-images/survey_form.jpg')",
+                          "url('../assets/img/pylons.jpg')",
                       }}
                     ></div>
                   </div>

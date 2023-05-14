@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { NavLink } from "react-router-dom";
-import AddWebsite from "../dashboard/AddWebsite";
+import AddTransformer, { AddUser } from "../dashboard/AddTransformer";
 
 export default function SideBar() {
 
@@ -23,7 +23,7 @@ export default function SideBar() {
             className="navbar-brand-img h-100"
             alt="main_logo"
           /> */}
-          <span className="ms-1 font-weight-bold">Probable Dribble</span>
+          <span className="ms-1 font-weight-bold">Transformer Tracking</span>
         </a>
       </div>
       <hr className="horizontal dark mt-0" />
@@ -75,7 +75,7 @@ export default function SideBar() {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="/suggestions">
+            <NavLink className="nav-link" to="/transformers">
               <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg
                   width="12px"
@@ -116,12 +116,13 @@ export default function SideBar() {
                   </g>
                 </svg>
               </div>
-              <span className="nav-link-text ms-1">Suggestions</span>
+              <span className="nav-link-text ms-1">Transformers</span>
             </NavLink>
           </li>
         </ul>
       </div>
-      <AddWebsite />
+      <AddTransformer />
+      <AddUser />
     </aside>
   );
 }
