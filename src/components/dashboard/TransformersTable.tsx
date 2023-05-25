@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
@@ -6,10 +6,12 @@ import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import axios from "axios";
 import ViewTransformer from './ViewTransformer';
+import AddTransformer from './AddTransformer';
 
 
 export default function TransformerTable() {
-  const [transformers, setSuggestions] = useState([]);
+  const [transformers, setTransformers] = useState([]);
+  const [reload, setReload] = useState(false);
 
   const token = localStorage.getItem("access_token");
   const accessToken = token !== null ? JSON.parse(token) : null;
@@ -36,7 +38,7 @@ export default function TransformerTable() {
       )
       .then((res) => {
         if (res.status === 200) {
-          setSuggestions(res.data);
+          setTransformers(res.data);
         }
       })
       .catch((err) => {
@@ -45,17 +47,50 @@ export default function TransformerTable() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // let percentIncrease: number = ( data.new_  websites_this_month / data.total_number_of_websites_last_month ) * 100;
-  // let test : number = 0;
+  useEffect(() => {
+    if (reload) {
+      axios
+        .get(
+          `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}transformers`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+              accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            setTransformers(res.data);
+            setReload(false);
+          }
+        })
+        .catch((err) => {
+          // console.log(err);
+          setReload(false);
+        });
+    }
 
-  // const dateCreated = (record: any) => {
-  //   const toBeFormatted = new Date(record?.created);
-  //   return toBeFormatted.toLocaleDateString("en-ZA", {
-  //     year: "numeric",
-  //     month: "long",
-  //     day: "numeric",
-  //   });
-  // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reload]);
+
+  const cableStatus = (record: any) => {
+    return (
+      record?.status
+        ? <>
+          <div className='text-success'>
+            Active
+          </div>
+
+        </>
+        : <>
+          <div className='text-danger'>
+            InActive
+          </div>
+        </>
+    )
+  }
 
   return (
     <>
@@ -69,6 +104,14 @@ export default function TransformerTable() {
                 </div>
               </div>
             </div>
+            <div className='row gutters'>
+              <div className='col-9'>
+              </div>
+              <div className='col-3'>
+                <AddTransformer setReload={setReload} />
+              </div>
+            </div>
+
             <div className="card-body px-0 pb-2">
               <DataTable
                 value={transformers}
@@ -82,9 +125,11 @@ export default function TransformerTable() {
                 rows={15}
               >
                 <Column field="" />
-                <Column field="created" header="Added"/>
+                <Column field="created" header="Added" />
                 <Column field="location" header="Location" />
                 <Column field="city" header="City" />
+                <Column field="transformer_identity" header="Transformer Id" />
+                <Column header="Status" body={cableStatus} />
                 <Column header="View" body={viewTransformer} />
               </DataTable>
             </div>

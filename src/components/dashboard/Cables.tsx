@@ -1,8 +1,8 @@
 import React from 'react'
 import Container from "../common/Container";
-import TransformersTable from './TransformersTable'
+import CablesTable from './CablesTable'
 
 
 export default function Transformers() {
-  return <Container content={<TransformersTable />} />;
+  return <Container content={<CablesTable />} />;
 }

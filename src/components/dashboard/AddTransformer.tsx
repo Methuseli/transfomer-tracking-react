@@ -17,13 +17,14 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 
-export default function AddTransformer() {
+export default function AddTransformer({setReload} : any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     location: "",
     city: "",
+    transformer_identity: "",
   });
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
@@ -89,8 +90,10 @@ export default function AddTransformer() {
             setData({
               location: "",
               city: "",
+              transformer_identity: "",
             });
             onClose();
+            setReload(true);
           }, 3000);
         }
       })
@@ -117,7 +120,7 @@ export default function AddTransformer() {
   return (
     <>
       <button className="btn btn-primary" onClick={onOpen}>
-        Add A Transformer
+        Add Transformer
       </button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -145,6 +148,16 @@ export default function AddTransformer() {
                   type="text"
                   name="city"
                   placeholder="City"
+                  onChange={handleChange}
+                />
+              </FormControl>
+              <br />
+              <FormControl>
+                <FormLabel>Transformer Id</FormLabel>
+                <Input
+                  type="text"
+                  name="transformer_identity"
+                  placeholder="Transformer Id"
                   onChange={handleChange}
                 />
               </FormControl>
@@ -284,7 +297,7 @@ export function AddUser() {
   return (
     <>
       <button className="btn btn-primary" onClick={onOpen}>
-        Add Users
+        Add User
       </button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
