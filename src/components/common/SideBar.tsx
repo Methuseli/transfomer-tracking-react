@@ -23,7 +23,7 @@ export default function SideBar() {
             className="navbar-brand-img h-100"
             alt="main_logo"
           /> */}
-          <span className="ms-1 font-weight-bold">Transformer Tracking</span>
+          <span className="ms-1 font-weight-bold">ZETDC Tracking</span>
         </a>
       </div>
       <hr className="horizontal dark mt-0" />
