@@ -7,6 +7,7 @@ import "primeicons/primeicons.css";
 import axios from "axios";
 import ViewTransformer from './ViewTransformer';
 import AddTransformer from './AddTransformer';
+import EditTransformer from './EditTransformer';
 
 
 export default function TransformerTable() {
@@ -15,14 +16,6 @@ export default function TransformerTable() {
 
   const token = localStorage.getItem("access_token");
   const accessToken = token !== null ? JSON.parse(token) : null;
-
-  const viewTransformer = (record: any) => {
-    return (
-      <>
-        <ViewTransformer transformer={record} />
-      </>
-    );
-  };
 
   useEffect(() => {
     axios
@@ -92,6 +85,18 @@ export default function TransformerTable() {
     )
   }
 
+  const transformerActions = (record: any) => {
+    return (
+      <>
+        <ViewTransformer transformer={record} />{" "}
+        <EditTransformer setReload={setReload} record={record} />{" "}
+        <button className="btn btn-dark" style={{color: "yellow"}} onClick={() => { }}>
+          Tech Mobility
+        </button>
+      </>
+    );
+  };
+
   return (
     <>
       <div className="row my-4">
@@ -130,7 +135,7 @@ export default function TransformerTable() {
                 <Column field="city" header="City" />
                 <Column field="transformer_identity" header="Transformer Id" />
                 <Column header="Status" body={cableStatus} />
-                <Column header="View" body={viewTransformer} />
+                <Column header="View" body={transformerActions} />
               </DataTable>
             </div>
           </div>

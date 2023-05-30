@@ -5,8 +5,8 @@ import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import axios from "axios";
-import ViewTransformer from './ViewTransformer';
 import AddManhole from './AddManhole';
+import EditManhole from "./EditManhole"
 
 
 export default function ManholesTable() {
@@ -16,10 +16,13 @@ export default function ManholesTable() {
     const accessToken = token !== null ? JSON.parse(token) : null;
     const [reload, setReload] = useState(false);
 
-    const viewTransformer = (record: any) => {
+    const manholeActions = (record: any) => {
         return (
             <>
-                <ViewTransformer transformer={record} />
+                <EditManhole setReload={setReload} record={record} />
+                <button className="btn btn-dark" style={{color: "yellow"}} onClick={() => {}}>
+                    Tech Mobility
+                </button>
             </>
         );
     };
@@ -130,7 +133,7 @@ export default function ManholesTable() {
                                 <Column field="city" header="City" />
                                 <Column field="manhole_id" header="Manhole Id" />
                                 <Column header="Status" body={cableStatus} />
-                                {/* <Column header="View" body={viewTransformer} /> */}
+                                <Column header="Actions" body={manholeActions} />
                             </DataTable>
                         </div>
                     </div>

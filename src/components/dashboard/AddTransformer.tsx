@@ -14,11 +14,13 @@ import {
   ModalFooter,
   Alert,
   AlertIcon,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 
 export default function AddTransformer({setReload} : any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
@@ -94,7 +96,12 @@ export default function AddTransformer({setReload} : any) {
             });
             onClose();
             setReload(true);
-          }, 3000);
+            toast({
+              title: "Successfully added transformer",
+              status: "success",
+              isClosable: true,
+          });
+          }, 500);
         }
       })
       .catch((err) => {
@@ -102,7 +109,7 @@ export default function AddTransformer({setReload} : any) {
         setTimeout(() => {
           setError("Something went wrong. Try again");
           setLoading(false);
-        }, 3000);
+        }, 500);
       });
   };
 
@@ -193,6 +200,7 @@ export default function AddTransformer({setReload} : any) {
 
 export function AddUser() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
@@ -271,6 +279,11 @@ export function AddUser() {
               email: "",
             });
             onClose();
+            toast({
+              title: "Successfully added user",
+              status: "success",
+              isClosable: true,
+          });
           }, 3000);
         }
       })

@@ -14,12 +14,14 @@ import {
   ModalFooter,
   Alert,
   AlertIcon,
+  useToast
 } from "@chakra-ui/react";
 import axios from "axios";
 
 
-export default function AddCable({setReload} : any) {
+export default function AddManhole({setReload} : any) {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const toast = useToast();
   
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
@@ -95,7 +97,12 @@ export default function AddCable({setReload} : any) {
               });
               onClose();
               setReload(true);
-            }, 3000);
+              toast({
+                title: "Successfully added manhole",
+                status: "success",
+                isClosable: true,
+            });
+            }, 500);
           }
         })
         .catch((err) => {
@@ -103,7 +110,7 @@ export default function AddCable({setReload} : any) {
           setTimeout(() => {
             setError("Something went wrong. Try again");
             setLoading(false);
-          }, 3000);
+          }, 500);
         });
     };
   

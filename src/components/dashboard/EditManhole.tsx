@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Spinner,
     Modal,
@@ -15,20 +15,19 @@ import {
     Alert,
     AlertIcon,
     useToast,
+    Radio,
+    RadioGroup
 } from "@chakra-ui/react";
 import axios from "axios";
 
 
-export default function AddCable({ setReload }: any) {
+export default function EditManhole({ setReload, record }: any) {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const toast = useToast();
 
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState({
-        cable_id: "",
-        location: "",
-        city: "",
-    });
-    const toast = useToast();
+    const [data, setData] = useState({});
+    const [status, setStatus] = useState<string>("");
 
     const handleChange = (e: { target: { name: any; value: any } }) => {
         setError("");
@@ -51,7 +50,7 @@ export default function AddCable({ setReload }: any) {
     const success = (
         <Alert status="success">
             <AlertIcon />
-            "Successfully added cable"
+            "Successfully edited cable"
         </Alert>
     );
 
@@ -67,16 +66,14 @@ export default function AddCable({ setReload }: any) {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         setLoading(true);
-        console.log("Data ", data);
-        if (data?.cable_id === "" || data?.location === "" || data?.city === "") {
-            setLoading(false);
-            setError("Fill all the required fields!");
-            return;
+        const payload = {
+            ...data,
+            status: status === "active" ? true : false
         }
         axios
-            .post(
-                `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}cables/`,
-                data,
+            .patch(
+                `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}manholes/${record?.id}/`,
+                payload,
                 {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -86,20 +83,16 @@ export default function AddCable({ setReload }: any) {
                 }
             )
             .then((res) => {
-                if (res.status === 201) {
+                if (res.status === 200) {
                     setTimeout(() => {
                         setSuccessful(true);
                         setLoading(false);
                         setError("");
-                        setData({
-                            cable_id: "",
-                            location: "",
-                            city: "",
-                        });
+                        setData({});
                         onClose();
                         setReload(true);
                         toast({
-                            title: "Successfully added cable",
+                            title: "Successfully edited manhole",
                             status: "success",
                             isClosable: true,
                         });
@@ -109,7 +102,7 @@ export default function AddCable({ setReload }: any) {
             .catch((err) => {
                 console.log(err);
                 setTimeout(() => {
-                    setError("Something went wrong. Try again");
+                    setError("Failed to edit manhole");
                     setLoading(false);
                 }, 500);
             });
@@ -126,10 +119,18 @@ export default function AddCable({ setReload }: any) {
         "Submit"
     );
 
+    useEffect(() => {
+        if (record) {
+            record.status
+                ? setStatus("active")
+                : setStatus("inactive");
+        }
+    }, [record]);
+
     return (
         <>
             <button className="btn btn-primary" onClick={onOpen}>
-                Add Cable
+                Edit
             </button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
@@ -137,16 +138,16 @@ export default function AddCable({ setReload }: any) {
                 <ModalContent>
                     <>{errorValue}</>
                     <>{successComponent}</>
-                    <ModalHeader className="h4">Add Cable</ModalHeader>
+                    <ModalHeader className="h4">Add Manhole</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <form onSubmit={handleSubmit}>
                             <FormControl>
-                                <FormLabel className="">Cable ID</FormLabel>
+                                <FormLabel className="">Manhole ID</FormLabel>
                                 <Input
                                     type="text"
-                                    name="cable_id"
-                                    placeholder="Cable ID"
+                                    name="manhole_id"
+                                    placeholder={`${record?.manhole_id}`}
                                     onChange={handleChange}
                                 />
                             </FormControl>
@@ -156,7 +157,7 @@ export default function AddCable({ setReload }: any) {
                                 <Input
                                     type="text"
                                     name="location"
-                                    placeholder="Location"
+                                    placeholder={`${record?.location}`}
                                     onChange={handleChange}
                                 />
                             </FormControl>
@@ -166,11 +167,22 @@ export default function AddCable({ setReload }: any) {
                                 <Input
                                     type="text"
                                     name="city"
-                                    placeholder="City"
+                                    placeholder={`${record?.city}`}
                                     onChange={handleChange}
                                 />
                             </FormControl>
                             <br />
+                            <RadioGroup
+                                onChange={setStatus}
+                                value={status}
+                            >
+                                <Radio value='active'>
+                                    Active
+                                </Radio>
+                                <Radio value='inactive'>
+                                    InActive
+                                </Radio>
+                            </RadioGroup>
                         </form>
                     </ModalBody>
 
@@ -198,5 +210,3 @@ export default function AddCable({ setReload }: any) {
         </>
     );
 }
-
-

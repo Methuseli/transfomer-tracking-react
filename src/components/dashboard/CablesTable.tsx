@@ -5,8 +5,8 @@ import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import axios from "axios";
-import ViewTransformer from './ViewTransformer';
 import AddCable from './AddCable';
+import EditCable from './EditCable';
 
 
 export default function CablesTable() {
@@ -15,14 +15,6 @@ export default function CablesTable() {
 
     const token = localStorage.getItem("access_token");
     const accessToken = token !== null ? JSON.parse(token) : null;
-
-    const viewTransformer = (record: any) => {
-        return (
-            <>
-                <ViewTransformer transformer={record} />
-            </>
-        );
-    };
 
     useEffect(() => {
         axios
@@ -92,6 +84,17 @@ export default function CablesTable() {
         )
     }
 
+    const cableActions = (record: any) => {
+        return (
+          <>
+            <EditCable setReload={setReload} record={record} />{" "}
+            <button className="btn btn-dark" style={{color: "yellow"}} onClick={() => { }}>
+              Tech Mobility
+            </button>
+          </>
+        );
+      };
+
 
     return (
         <>
@@ -131,7 +134,7 @@ export default function CablesTable() {
                                 <Column field="city" header="City" />
                                 <Column field="cable_id" header="Cable Id" />
                                 <Column header="Status" body={cableStatus} />
-                                {/* <Column header="View" body={viewTransformer} /> */}
+                                <Column header="Actions" body={cableActions} />
                             </DataTable>
                         </div>
                     </div>

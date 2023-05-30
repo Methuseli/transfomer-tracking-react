@@ -148,7 +148,7 @@ const basicOptions = getLightTheme();
 
   return (
     <>
-      <button className="btn btn-secondary" onClick={onOpen}>
+      <button className="btn btn-info" onClick={onOpen}>
         View
       </button>
 
