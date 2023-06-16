@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import StatisticsHeader from "./StatisticsHeader";
 // import UserStatistics from "./UserStatistics";
 // import Websites from "./Websites";
+import Events from "./Events";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
@@ -19,7 +20,7 @@ export default function Dashboard(){
           `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_API_VERSION}dashboard`,
           {
             headers: {
-              Authorization: `JWT ${accessToken}`,
+              Authorization: `Bearer ${accessToken}`,
               "Content-Type": "application/json",
               accept: "application/json",
             },
@@ -40,7 +41,7 @@ export default function Dashboard(){
         <>
             <div className="container-fluid py-4">
                 <StatisticsHeader data={data}/>
-                {/* <UserStatistics /> */}
+                <Events />
                 {/* <Websites data={data}/> */}
             </div>
         </>
