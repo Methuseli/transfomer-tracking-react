@@ -3,11 +3,6 @@
 The project feeds off the django backend and is connected to it via rest API. The react fronented is written in typescript, a superset of javascript
 to make the development experience better and having errors appear before runtime.
 
-The application uses Json web tokens for authentication and communicates with the server via https for safety. 
-
-In the dashboard, institutions sign up and sign in to the dashboard. Here they can add their website. They can also view explicit suggestions from users on
-how they can improve their website. 
-
 The code base uses primereact and the aid of chakra UI for asthetics and visual representation of the data via graphs. 
 
 The  data tables implement lazy loading for perfomance considerations.
